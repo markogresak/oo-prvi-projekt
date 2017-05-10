@@ -2,6 +2,10 @@
   text-align: center;
 }
 
+.text-justify {
+  text-align: justify;
+}
+
 .text-muted {
   color: #777;
 }
@@ -18,12 +22,16 @@ small.text-muted {
   padding-right: 16px;
 }
 
-.mb-3 {
-  margin-bottom: 3rem;
+.mb-2 {
+  margin-bottom: 2rem;
 }
 
 .mb-0 {
   margin-bottom: 0;
+}
+
+.img-thumbnail {
+  height: 100px;
 }
 
 * {
@@ -64,7 +72,6 @@ a.disabled {
   flex-direction: column;
 }
 
-.navigation-tile,
 .room-tile {
   width: 300px;
   height: 150px;
@@ -77,6 +84,15 @@ a.disabled {
   font-size: 20px;
   cursor: pointer;
   text-decoration: none;
+}
+
+.navigation__tile {
+  border: 1px solid #444;
+}
+
+.navigation__description {
+  width: 900px;
+  margin: auto;
 }
 
 .room-tile-wrapper {
@@ -130,6 +146,13 @@ html.tabla-view > body {
 .tabla {
   height: 100vh;
   max-width: 1920px;
+}
+
+@media only screen and (min-width: 1000px) {
+  .tabla.center {
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
 }
 
 .tabla .img-wrapper {
