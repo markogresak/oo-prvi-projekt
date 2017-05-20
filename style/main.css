@@ -226,6 +226,14 @@ html.board-view > body {
   height: 40.1%;
 }
 
+.board .board-10__video {
+  position: absolute;
+  left: 31.3%;
+  top: 38.1%;
+  width: 38.5%;
+  height: 42.3%;
+}
+
 @media only screen and (min-width: 1500px) {
   html.board-view > body {
     justify-content: center;
