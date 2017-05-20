@@ -201,7 +201,8 @@ html.board-view > body {
   display: inline-block;
 }
 
-.board .img-wrapper img {
+.board .img-wrapper img,
+.board .img-wrapper .img {
   height: 100vh;
   max-height: 100vh;
   width: auto;
@@ -246,7 +247,8 @@ html.board-view > body {
     min-height: 500px;
   }
 
-  .board .img-wrapper img {
+  .board .img-wrapper img,
+  .board .img-wrapper .img {
     min-height: 500px;
     height: 100%;
   }
