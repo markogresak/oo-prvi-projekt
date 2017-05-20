@@ -185,6 +185,10 @@ html.board-view > body {
   max-width: 1920px;
 }
 
+.flex {
+  display: flex;
+}
+
 @media only screen and (min-width: 1000px) {
   .board.center {
     margin-left: 50%;
