@@ -132,41 +132,40 @@ a.disabled {
   position: relative;
 }
 
-html.tabla-view,
-html.tabla-view > body {
+html.board-view,
+html.board-view > body {
   overflow-y: hidden;
   height: 100%;
 }
 
-html.tabla-view > body {
+html.board-view > body {
   display: flex;
   align-items: center;
 }
 
-.tabla {
+.board {
   height: 100vh;
   max-width: 1920px;
 }
 
 @media only screen and (min-width: 1000px) {
-  .tabla.center {
     margin-left: 50%;
     transform: translateX(-50%);
   }
 }
 
-.tabla .img-wrapper {
+.board .img-wrapper {
   position: relative;
   display: inline-block;
 }
 
-.tabla .img-wrapper img {
+.board .img-wrapper img {
   height: 100vh;
   max-height: 100vh;
   width: auto;
 }
 
-.tabla video {
+.board video {
   position: absolute;
   left: 37%;
   top: 35.4%;
@@ -175,18 +174,18 @@ html.tabla-view > body {
 }
 
 @media only screen and (min-width: 1500px) {
-  html.tabla-view > body {
+  html.board-view > body {
     justify-content: center;
   }
 }
 
 @media only screen and (min-height: 500px) {
-  .tabla {
+  .board {
     height: auto;
     min-height: 500px;
   }
 
-  .tabla .img-wrapper img {
+  .board .img-wrapper img {
     min-height: 500px;
     height: 100%;
   }
