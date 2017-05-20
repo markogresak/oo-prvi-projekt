@@ -210,11 +210,19 @@ html.board-view > body {
   border: 2px solid #999;
 }
 
-.board video {
+.board .board-1__video {
   position: absolute;
   left: 37%;
   top: 35.4%;
   width: 17.7%;
+  height: 40.1%;
+}
+
+.board .board-2__video {
+  position: absolute;
+  left: 77.1%;
+  top: 29.8%;
+  width: 17.5%;
   height: 40.1%;
 }
 
