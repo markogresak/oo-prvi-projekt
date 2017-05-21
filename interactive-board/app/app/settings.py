@@ -49,6 +49,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+X_FRAME_OPTIONS = 'ALLOW-FROM https://markogresak.github.io'
 ROOT_URLCONF = 'app.urls'
 
 TEMPLATES = [
