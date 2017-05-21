@@ -1,0 +1,103 @@
+{% extends "konceptneTable/base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    {{ table.name }}
+{% endblock %}
+
+{% block content %}
+<div class='marquee'>
+    {% for image in common_images %}
+       {% with 'konceptneTable/media/commonImages/'|add:image as image_static %}
+                <img src="{% static image_static %}" alt="{{ image }}"/>
+        {% endwith %}
+    {% endfor %}
+</div>
+
+<div class="contentTable" id="contentPlaceholder">
+    {% for piece in content %}
+        {% with 'konceptneTable/media/content/'|add:piece.filename as piece_name %}
+            <div class="contentPieceWrapper">
+            {% if piece.isImage %}
+                {% if piece.file %}
+                    {# User provided image #}
+                    {% with 'konceptneTable/media/content/'|add:piece.file_name as path %}
+                        <img src="{% static path %}" alt="{{ piece.description }}"/>
+                    {% endwith %}
+                {% else %}
+                    {# Static image that was there when we initialized table #}
+                    {% if table.id == 2 and piece.filename == "b_2_oho.PNG" %} <!-- To sliko obravnavamo posebej -->
+                        <img src="{% static piece_name %}" alt="{{ piece.description }}" id="specialImage"/>
+                    {% else %}
+                        <img src="{% static piece_name %}" alt="{{ piece.description }}"/>
+                    {% endif %}
+                {% endif %}
+            {% else %}
+                {% if piece.autoplay %}
+                    <video preload autoplay class="autoplay" id="{{ piece.id }}">
+                {% else %}
+                    <video preload id="{{ piece.id }}">
+                {% endif %}
+                    {% if piece.file %}
+                        <source src="{{ piece.file.url }}" type="video/mp4">
+                    {% else %}
+                        <source src="{% static piece_name %}" type="video/mp4">
+                {% endif %}
+                </video>
+            {% endif %}
+            </div>
+        {% endwith %}
+    {% endfor %}
+</div>
+<div class="commentBand">
+    <div class="marqueeComments">
+    {% for comment in table.comment_set.all|slice:"3" %}
+        {% if forloop.last %}
+            <span>
+            {% else %}
+            <span class="spacing">
+            {% endif %}
+                {{ comment.content }}
+            </span>
+    {% endfor %}
+    </div>
+</div>
+
+<div class="lower">
+    <div id="descriptionContainer" class="lowerChild">
+         <div id="description-si">
+            {% include "konceptneTable/contentDescription.html" with table=table content=content %}
+        </div>
+        <div id="description-en" style="display:none;">
+            {% include "konceptneTable/contentDescription_en.html" with table=table content=content %}
+        </div>
+    </div>
+<div id="queryResultsContainer" class="lowerChild">
+{#    User's search results here #}
+</div>
+</div>
+
+<div class="bottom">
+    <div class="iconContainer">
+        <img src="{% static 'konceptneTable/media/Slovenia-Flag-icon.png' %}" alt="Slovensko" class="icon" id="iconSlo"/>
+        <img src="{% static 'konceptneTable/media/United-Kingdom-flag-icon.png' %}" alt="English" class="icon" id="iconEn"/>
+    </div>
+
+    <input id="sendComment" type="button" value="Pošlji komentar" class="btn btn-lg btn-default tableButtons">
+    <input id="sendQuery" type="button" value="Iskanje" class="btn btn-lg btn-default tableButtons">
+    <input id="clearSearch" type="button" value="Počisti rezultate iskanja" class="btn btn-lg btn-default tableButtons" style="display:none;">
+    <img src="{% static  'konceptneTable/media/loading.gif' %}" id="loader" style="display:none;"/>
+
+    <form  id="commentForm" method="post">
+        {% csrf_token %}
+          <input type="text" id="keyboard" style="display:none;" name="content"/>
+          <input type="submit" id="#submitComment" style="display:none;"/>
+    </form>
+    <form  id="queryForm" method="post">
+        {% csrf_token %}
+{#          <input type="text" id="keyboard" style="display:none;" name="queryContent"/>#}
+          <input type="submit" id="#submitQuery" style="display:none;"/>
+    </form>
+</div>
+
+{% endblock %}

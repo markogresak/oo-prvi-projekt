@@ -1,0 +1,7 @@
+- model: auth.user
+  pk: 1
+  fields:
+    first_name: Administrator
+    username: admin
+    is_superuser: true
+    password: pbkdf2_sha256$24000$ULNEprZddknp$GPQ6Pd6tlHg/UpkVnrClPQiNfS2z7OHeoN+oNfEASps=

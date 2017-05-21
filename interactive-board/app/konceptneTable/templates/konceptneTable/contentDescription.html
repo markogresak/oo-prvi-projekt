@@ -1,0 +1,27 @@
+<p>
+    {{ table.author }}<br/>
+    <span class="tableTitle">
+        {{ table.name }}
+    </span>
+    <br/>
+    {{ table.copyright }}
+</p>
+
+<p>
+    /{{ table.description }}/
+</p>
+
+<p>
+    Od leve proti desni: <br/>
+    {% for piece in content %}
+        <span class="contentItemNumber">
+            {{ piece.slot|add:1 }}.)
+        </span>
+        {% if piece.description != null %}
+            {{ piece.description }}
+        {% else %}
+            <i>***Manjka opis***</i>
+        {% endif %}
+        <br/>
+    {% endfor %}
+</p>

@@ -1,0 +1,65 @@
+{% extends "konceptneTable/base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    {{ table.name }} | Komentarji
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row centering">
+        <h1 class="title">{{ table.name }} </h1>
+        <div>
+            <a title="Domov" class = "btn btn-primary btn-md" href="{% url 'index' %}"><span class="giant-glyph glyphicon glyphicon-home"></span> </a>
+            <a title="Predvajaj tablo" href="{% url 'showConceptTable' table.id %}" class="btn btn-success btn-md"><span class="giant-glyph glyphicon glyphicon-play"></span></a>
+            {% if request.user.is_authenticated %}
+                <a title="Uredi" href="{% url 'editConceptTable' table.id %}" class="btn btn-info btn-md"><span class="giant-glyph glyphicon glyphicon-edit"></span></a>
+            {% endif %}
+        </div>
+        <h2>Komentarji obiskovalcev razstave</h2>
+    </div>
+
+    {% if comments_by_day %}
+        {% for date, time_content in comments_by_day.items %}
+               <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>{{ date }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for comment in time_content %}
+                            <tr>
+                                {% for i in comment%}
+                                    {% if forloop.first %}
+                                        <td class="col-md-1">{{ i }}</td>
+                                    {% else %}
+                                        <td class="col-md-10">{{ i.content }}</td>
+                                        {% if request.user.is_authenticated %}
+                                           <td class="col-md-1"><a title="Izbriši komentar" href="{% url 'deleteComment' i.id %}" class="btn btn-danger btn-sm"><span class="giant-glyph glyphicon glyphicon-trash"></span></a></td>
+                                        {% endif %}
+                                    {% endif %}
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endfor %}
+    {% else %}
+        <div class="row centering">
+            <i>Ta tabla trenutno nima nobenega komentarja.</i>
+        </div>
+    {% endif %}
+
+       {% if request.user.is_authenticated %}
+            <div class="row centering userData">
+                Prijavljeni ste kot <i>{{ user.get_username }}</i><br/>
+                <a href="{% url 'logout' %}?next=/" role="button" class="btn btn-default btn-sm">Odjava</a>
+            </div>
+        {% endif %}
+</div>
+
+{% include 'konceptneTable/copyright.html' %}
+{% endblock %}

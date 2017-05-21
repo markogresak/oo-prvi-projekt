@@ -1,0 +1,18 @@
+<span class="searchResultsTitle" id="searchResultsTitle">Rezultati iskanja za "<i>{{ query }}</i>"</span>
+<br/>
+{# Text results #}
+{% for linkTitle, link in data.items %}
+        <a class="searchResults" href="{{ link }}">
+                {{ linkTitle }}
+        </a>
+    <br/>
+{% endfor %}
+
+{# Image results #}
+<div class="searchResultsImageContainer">
+  {% for img in images %}
+      {% if forloop.counter <= 5 %}
+            <img src="{{ img }}" class="searchResultImage" />
+      {% endif %}
+{% endfor %}
+</div>

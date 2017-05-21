@@ -1,0 +1,9 @@
+{% for comment in table.comment_set.all|slice:":3" %}
+    {% if forloop.last %}
+        <span>
+        {% else %}
+        <span class="spacing">
+        {% endif %}
+            {{ comment.content }}
+        </span>
+{% endfor %}

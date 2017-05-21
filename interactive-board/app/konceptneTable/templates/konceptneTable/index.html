@@ -1,0 +1,59 @@
+{% extends "konceptneTable/base.html" %}
+{% load staticfiles %}
+
+{% block title %}
+    Konceptne table | Izbira
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row centering">
+        <h1 class="title">Konceptne table </h1>
+    </div>
+
+    {% include 'konceptneTable/messages.html' %}
+
+    <div class="centering">
+         <p>Izberi konceptno tablo</p>
+    </div>
+
+    {% for table in concept_tables %}
+        <div class="row centering">
+            <h3 class="my-h3">{{ table.name }}</h3>
+            <a class = "btn btn-success btn-lg" role="button" href="{% url 'showConceptTable' table.id %}">
+                <span class="glyphicon glyphicon-play"></span>
+            </a>
+            <a class="btn btn-default btn-lg" title="Prikaži komentarje" href="{% url 'showTableComments' table.id %}">
+                <span class="glyphicon glyphicon-export"></span>
+                Komentarji
+            </a>
+            {% if request.user.is_authenticated %}
+                <a class="btn btn-info btn-lg" role="button" href="{% url 'editConceptTable' table.id %}">Uredi vsebino</a>
+                <a class="btn btn-danger btn-lg" title="izbriši" href="{% url 'deleteConceptTable' table.id %}">
+                    <span class="glyphicon glyphicon-trash"></span>
+                </a>
+            {% endif %}
+        </div>
+    {% endfor %}
+    <br/>
+    <br/>
+
+    <div class="row centering">
+        {%  if not request.user.is_authenticated %}
+        <a title="Domov" class = "btn btn-primary btn-lg" href="{% url 'login' %}"><span class="glyphicon glyphicon-user"></span> Prijavi se kot skrbnik</a>
+        {% else %}
+            <br/>
+            <div>
+                Prijavljeni ste kot <i>{{ user.get_username }}</i><br/>
+                <a href="{% url 'logout' %}?next=/" role="button" class="btn btn-default btn-sm">Odjava</a>
+            </div>
+        {% endif %}
+    </div>
+
+{#    <hr>#}
+{#    <a class="btn btn-info btn-lg" role="button" href="#">Ustvari novo tablo</a>#}
+</div>
+
+{% include 'konceptneTable/copyright.html' %}
+
+{% endblock %}

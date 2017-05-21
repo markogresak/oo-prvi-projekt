@@ -1,0 +1,23 @@
+{% load staticfiles %}
+
+{# IMAGE #}
+{% if piece.isImage %}
+    {% if piece.file %}
+        {# User provided image #}
+        {% with 'konceptneTable/media/content/'|add:piece.file_name as path %}
+            <img class="sortableElement" id="{{ piece.slot }}" src="{% static path %}" alt="{{ piece.description }}"/>
+        {% endwith %}
+    {% else %}
+        {# Static image that was there when we initialized table #}
+        <img class="sortableElement" id="{{ piece.slot }}" src="{% static piece_name %}" alt="{{ piece.description }}"/>
+    {% endif %}
+{% else %}
+    {# VIDEO #}
+    <video class="sortableElement" id="{{ piece.slot }}" class="" controls preload>
+    {% if piece.file %}
+        <source src="{{ piece.file.url }}" type="video/mp4">
+    {% else %}
+           <source src="{% static piece_name %}" type="video/mp4">
+    {% endif %}
+    </video>
+{% endif %}

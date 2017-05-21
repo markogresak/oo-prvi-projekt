@@ -1,0 +1,120 @@
+- model: konceptneTable.ConceptTable
+  pk: 1
+  fields:
+    name: Konceptna Tabla A
+    name_en: Concept table A
+    author: Srečo Dragan
+    copyright: Predstavljena medijska dela pripadajo paru Nuša & Srečo Dragan
+    copyright_en: The project's representation here are authors of the couple Nuša & Srečo Dragan
+    description: Gibljive slike, ki se kontekstualizirajo kot perceptivne in programirane situacije v mediju filma "THE EXPANDED CINEMA" in poletnih oho projektov, land art
+    description_en: Motion pictures that are contextualized as perceptive and programmed situations in the medium of film, "THE EXPANDED CINEMA" and summer oho projects, land art
+    contentSlots: 4
+
+- model: konceptneTable.Comment
+  pk: 1
+  fields:
+    conceptTable: 1
+    content: "Testiranje komentarjev na konceptni tabli"
+    published: '2016-04-15T20:17:44Z'
+
+- model: konceptneTable.Comment
+  pk: 2
+  fields:
+    conceptTable: 1
+    content: "Še en simboličen komentar"
+    published: '2016-04-15T20:18:44Z'
+
+- model: konceptneTable.Comment
+  pk: 3
+  fields:
+    conceptTable: 1
+    content: "Pozdravljeni, razstava mi je izjemno všeč. Prosim, kmalu ponovite."
+    published: '2016-04-15T20:18:44Z'
+
+- model: konceptneTable.ContentPiece
+  pk: 1
+  fields:
+    conceptTable: 1
+    description: Video "BELO MLEKO BELIH PRSI", 1969 #Fotograija iz videa "BELO MLEKO BELIH PRSI", 1969
+    description_en: Video "WHITE BREASTS' WHITE MILK", 1969
+    filename: belo_mleko.mp4 #a_1_breast.PNG
+    slot: 0
+    isImage: false
+    autoplay: true
+
+- model: konceptneTable.ContentPiece
+  pk: 2
+  fields:
+    conceptTable: 1
+    description: Fotografija iz hepeninga "RAZLIČNE STVARI SE RAZSTAVLJAJO", Titova cesta, Ljubljana, 1968
+    description_en: A photograph of "DIFFERENT THINGS ARE EXHIBITED" happening, Titova cesta, Ljubljana, 1968
+    filename: a_2_boy.PNG
+    slot: 1
+
+- model: konceptneTable.ContentPiece
+  pk: 3
+  fields:
+    conceptTable: 1
+    description: Fotografija projekta "STONOGA", park Zvezda, Ljubljana, 1968
+    description_en: A photograph of "THE CENTIPEDE PROJECT", Zvezda park, Ljubljana, 1968
+    filename: a_3_stonoga.PNG
+    slot: 2
+
+- model: konceptneTable.ContentPiece
+  pk: 4
+  fields:
+    conceptTable: 1
+    description: Prikazuje se film "RG", č/b, zvočni, iz leta 1969
+    description_en: Screening of the film "RG", b/w, sound film, 1969
+    filename: 2.mp4
+    slot: 3
+    isImage: false
+    autoplay: false
+
+- model: konceptneTable.ConceptTable
+  pk: 2
+  fields:
+    name: Konceptna Tabla C
+    name_en: Concept Table C
+    author: Srečo Dragan
+    copyright: Predstavljena medijska dela pripadajo paru Nuša & Srečo Dragan
+    copyright_en: The project's representation here are authors of the couple Nuša & Srečo Dragan
+    description: (Digitalni arhiv kot besedilo) je INTERAKTIVEN, HIPERBESEDILEN, PORAZDELJEN IN DINAMIČEN NOV MEDIJSKI OBJEKT
+    description_en: (A digital archive as a text) is AN INTERACTIVE, HYPERTEXTUAL, DISTRIBUTED AND DYNAMIC NEW MEDIA OBJECT
+    contentSlots: 5
+
+- model: konceptneTable.ContentPiece
+  pk: 5
+  fields:
+    conceptTable: 2
+    description: Knjiga "README", www.nettime.org, 1999
+    description_en: The book "README", www.nettime.org, 1999
+    filename: b_1_lady.PNG
+    slot: 0
+
+- model: konceptneTable.ContentPiece
+  pk: 6
+  fields:
+    conceptTable: 2
+    description: OHO publikacije, 60-ta in 70-ta
+    description_en: OHO publications, the '60s and the '70s
+    filename: b_2_oho.PNG
+    slot: 1
+
+- model: konceptneTable.ContentPiece
+  pk: 7
+  fields:
+    conceptTable: 2
+    description: Knjiga "THE MEDIUM IS THE MASSAGE", www.nettime.org, 1967
+    description_en: The book "THE MEDIUM IS THE MASSAGE", www.nettime.org, 1967
+    filename: b_3_marshall.PNG
+    slot: 2
+
+- model: konceptneTable.ContentPiece
+  pk: 8
+  fields:
+    conceptTable: 2
+    filename: b_4_cross.PNG
+    description: Subtematski standardi in navzkrižna sklicevanja
+    description_en: The subthematic standards and crossreferences
+    slot: 3

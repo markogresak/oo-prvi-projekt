@@ -1,0 +1,106 @@
+{% extends "konceptneTable/base.html" %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+
+{% block title %}
+    Urejanje table
+{% endblock %}
+
+{% block content %}
+<div class="contentContainer">
+
+    <div class="row centering">
+        <h1 class="title">{{ table.name }} </h1>
+    </div>
+
+    {% include 'konceptneTable/messages.html' %}
+
+    <a class = "btn btn-success btn-lg" role="button" title="Dodaj" data-target="#contentPieceModal" data-toggle="modal">
+        Dodaj nov element
+    </a>
+    <br/>
+
+    {% include 'konceptneTable/newContentPiece.html' with form=contentForm %} <!-- Modal for new content piece -->
+    {% include 'konceptneTable/editContentPiece.html' %} <!-- Modal for edit content piece -->
+
+    <div id="sortable">
+    {% for piece in table.contentpiece_set.all %}
+        <div class="previewPieceWrapper">
+        <div class="previewPieceCoverDiv">
+            <div class="ui-state-default">
+                {% with 'konceptneTable/media/content/'|add:piece.filename as piece_name %}
+                    {% include 'konceptneTable/contentPiecePreview.html' with piece=piece piece_name=piece_name %}
+                {% endwith %}
+            </div>
+        </div>
+        <div class="previewPieceButtons">
+            <button class = "btn btn-info editContentPieceBtn" id="{{ piece.id }}">
+                    <span class="glyphicon glyphicon-edit"></span>
+            </button>
+            <a class = "btn btn-danger" role="button" href="{% url 'deleteContentPiece' table.id piece.id %}" title="Izbriši">
+                    <span class="glyphicon glyphicon-remove"></span>
+            </a>
+        </div>
+        </div>
+
+    {% endfor %}
+    </div>
+
+    <form method="post" action="{% url 'reorderContent' table.id %}" name="hiddenForm">
+        {% csrf_token %}
+        {% for piece in table.contentpiece_set.all %}
+            <input type="hidden" name="{{ piece.slot }}" value="{{ piece.slot }}"/>
+        {% endfor %}
+    </form>
+
+</div>
+
+<div class="container">
+<h3 class="center">Podatki o tabli</h3>
+<form method="post" action="{% url 'saveConceptTable' table.id %}" class="editTableForm" class="form-horizontal">
+{% csrf_token %}
+    <b>Avtor</b><br/>
+    {{ form.author|add_class:"form-control" }}<br/>
+
+    <b>Avtorske pravice</b><br/>
+    {{ form.copyright|add_class:"fitHalfParent form-control" }}{{ form.copyright_en|add_class:"fitHalfParent form-control" }}<br/>
+    <br/>
+
+    <b>Opis table</b><br/>
+    {{ form.name|add_class:"fitHalfParent form-control" }}{{ form.name_en|add_class:"fitHalfParent form-control" }}<br/>
+    <br/>
+
+    <b>Ime table</b><br/>
+    {{ form.description|add_class:"fitHalfParent form-control" }}{{ form.description_en|add_class:"fitHalfParent form-control" }}<br/>
+    <br/>
+
+
+    {% if form.errors %}
+	<!-- Error messaging -->
+	<div id="errors">
+		<div class="inner">
+			<p>There were some errors in the information you entered. Please correct the following:</p>
+			{{ form.non_field_errors }}
+			<ul>
+				{% for field in form %}
+					{% if field.errors %}<li>{{ field.label }}: {{ field.errors|striptags }}</li>{% endif %}
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+	<!-- /Error messaging -->
+{% endif %}
+
+    <input type="submit" value="Posodobi" class="btn btn-primary btn-lg"/>
+</form>
+
+    {% if request.user.is_authenticated %}
+        <div class="row centering userData">
+        Prijavljeni ste kot <i>{{ user.get_username }}</i><br/>
+        <a href="{% url 'logout' %}?next=/" role="button" class="btn btn-default btn-sm">Odjava</a>
+    </div>
+    {% endif %}
+</div>
+
+{% include 'konceptneTable/copyright.html' %}
+{% endblock %}

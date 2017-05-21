@@ -1,0 +1,23 @@
+{% load widget_tweaks %}
+
+<form method="post" action="{% url 'updateContentPiece' piece.id %}">
+    {% csrf_token %}
+
+    <div id = "contentPieceEditForm" class="modal-body">
+        <b>Opis dela</b><br/>
+            {{ form.description|add_class:"fitHalfParent form-control edit" }}{{ form.description_en|add_class:"fitHalfParent form-control edit" }}<br/>
+        <br/>
+
+        {% if not piece.isImage %}
+        <div id="autoplayDiv">
+            <b>Samodejno predvajanje</b>
+            {{ form.autoplay }}
+            <br/>
+        </div>
+        {% endif %}
+    </div>
+    <div class="modal-footer">
+       <input class="btn btn-primary" type="submit" value="Posodobi" />
+       <input name="cancel" class="btn" type="submit" value="Prekliči"/>
+    </div>
+</form>

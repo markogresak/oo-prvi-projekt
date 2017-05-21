@@ -1,0 +1,37 @@
+{% load widget_tweaks %}
+
+<div class="modal fade" id="contentPieceModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h3>Dodaj nov element k vsebini</h3>
+            </div>
+            <form method="post" action="{% url 'addContentPiece' table.id %}" enctype="multipart/form-data">
+            <div class="modal-body">
+                {% csrf_token %}
+
+                <b>Opis dela</b><br/>
+                    {{ form.description|add_class:"fitHalfParent form-control" }}{{ form.description_en|add_class:"fitHalfParent form-control" }}<br/>
+                <br/>
+                <b>Izberi vrsto elementa</b><br/>
+                    {{ form.isImage|add_class:"inline form-control"}}
+                <br/>
+                <div id="autoplayDiv" style="display:none;">
+                    <b>Samodejno predvajanje</b>
+                    {{ form.autoplay }}
+                    <br/>
+                </div>
+                <br/>
+                <b>Izberi datoteko</b><br/>
+                    {{ form.file|add_class:"inline"}}
+                <br/>
+            </div>
+            <div class="modal-footer">
+               <input class="btn btn-primary" type="submit" value="Dodaj" />
+               <input name="cancel" class="btn" type="submit" value="Prekliči"/>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
